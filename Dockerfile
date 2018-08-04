@@ -35,16 +35,16 @@ RUN rm /opt/hadoop-3.1.0.tar.gz
 RUN rm /opt/apache-mahout-distribution-0.13.0.tar.gz
 RUN rm /root/ml-100k.zip
 
-RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> /opt/hadoop-3.1.0/conf/hadoop-env.sh
+RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> /opt/hadoop-3.1.0/etc/hadoop-env.sh
 
-RUN echo "<?xml version=\"1.0\"?>" > /opt/hadoop-3.1.0/conf/core-site.xml && \
-    echo "<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
-    echo "<configuration>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
-    echo "  <property>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
-    echo "    <name>fs.default.name</name>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
-    echo "    <value>hdfs://localhost:9000</value>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
-    echo "  </property>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
-    echo "</configuration>" >> /opt/hadoop-3.1.0/conf/core-site.xml
+RUN echo "<?xml version=\"1.0\"?>" > /opt/hadoop-3.1.0/etc/hadoop/core-site.xml && \
+    echo "<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>" >> /opt/hadoop-3.1.0/etc/hadoop/core-site.xml && \
+    echo "<configuration>" >> /opt/hadoop-3.1.0/etc/hadoop/core-site.xml && \
+    echo "  <property>" >> /opt/hadoop-3.1.0/etc/hadoop/core-site.xml && \
+    echo "    <name>fs.default.name</name>" >> /opt/hadoop-3.1.0/etc/hadoop/core-site.xml && \
+    echo "    <value>hdfs://localhost:9000</value>" >> /opt/hadoop-3.1.0/etc/hadoop/core-site.xml && \
+    echo "  </property>" >> /opt/hadoop-3.1.0/etc/hadoop/core-site.xml && \
+    echo "</configuration>" >> /opt/hadoop-3.1.0/etc/hadoop/core-site.xml
 
 RUN echo "export JAVA_HOME=\"/usr/lib/jvm/java-7-oracle\"" >> /root/.bashrc && \
     echo "export HADOOP_PREFIX=\"/opt/hadoop-1.2.1\"" >> /root/.bashrc && \
