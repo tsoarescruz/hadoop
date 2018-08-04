@@ -19,32 +19,32 @@ RUN apt-get -y install software-properties-common
 RUN add-apt-repository ppa:webupd8team/java
 RUN apt-get -y update
 RUN echo "oracle-java7-installer shared/accepted-oracle-license-v1-1 boolean true" | debconf-set-selections
-RUN apt-get -y install oracle-java7-installer
+RUN apt-get -y install oracle-java8-installer
 
 RUN apt-get -y install vim
 RUN apt-get -y install unzip
 
-RUN wget -P /opt http://ftp.unicamp.br/pub/apache/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
-RUN wget -P /opt http://ftp.unicamp.br/pub/apache/mahout/0.9/mahout-distribution-0.9.tar.gz
+RUN wget -P /opt http://ftp.unicamp.br/pub/apache/hadoop/common/hadoop-3.1.0/hadoop-3.1.0.tar.gz
+RUN wget -P /opt http://ftp.unicamp.br/pub/apache/mahout/0.13.0/apache-mahout-distribution-0.13.0.tar.gz
 RUN wget -P /root http://www.grouplens.org/system/files/ml-100k.zip
 
-RUN tar xvfz /opt/hadoop-1.2.1.tar.gz -C /opt
-RUN tar xvfz /opt/mahout-distribution-0.9.tar.gz -C /opt
+RUN tar xvfz /opt/hadoop-3.1.0.tar.gz -C /opt
+RUN tar xvfz /opt/apache-mahout-distribution-0.13.0.tar.gz -C /opt
 RUN unzip /root/ml-100k.zip -d /root
-RUN rm /opt/hadoop-1.2.1.tar.gz
-RUN rm /opt/mahout-distribution-0.9.tar.gz
+RUN rm /opt/hadoop-3.1.0.tar.gz
+RUN rm /opt/apache-mahout-distribution-0.13.0.tar.gz
 RUN rm /root/ml-100k.zip
 
-RUN echo "export JAVA_HOME=/usr/lib/jvm/java-7-oracle" >> /opt/hadoop-1.2.1/conf/hadoop-env.sh
+RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> /opt/hadoop-3.1.0/conf/hadoop-env.sh
 
-RUN echo "<?xml version=\"1.0\"?>" > /opt/hadoop-1.2.1/conf/core-site.xml && \
-    echo "<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>" >> /opt/hadoop-1.2.1/conf/core-site.xml && \
-    echo "<configuration>" >> /opt/hadoop-1.2.1/conf/core-site.xml && \
-    echo "  <property>" >> /opt/hadoop-1.2.1/conf/core-site.xml && \
-    echo "    <name>fs.default.name</name>" >> /opt/hadoop-1.2.1/conf/core-site.xml && \
-    echo "    <value>hdfs://localhost:9000</value>" >> /opt/hadoop-1.2.1/conf/core-site.xml && \
-    echo "  </property>" >> /opt/hadoop-1.2.1/conf/core-site.xml && \
-    echo "</configuration>" >> /opt/hadoop-1.2.1/conf/core-site.xml
+RUN echo "<?xml version=\"1.0\"?>" > /opt/hadoop-3.1.0/conf/core-site.xml && \
+    echo "<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
+    echo "<configuration>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
+    echo "  <property>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
+    echo "    <name>fs.default.name</name>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
+    echo "    <value>hdfs://localhost:9000</value>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
+    echo "  </property>" >> /opt/hadoop-3.1.0/conf/core-site.xml && \
+    echo "</configuration>" >> /opt/hadoop-3.1.0/conf/core-site.xml
 
 RUN echo "export JAVA_HOME=\"/usr/lib/jvm/java-7-oracle\"" >> /root/.bashrc && \
     echo "export HADOOP_PREFIX=\"/opt/hadoop-1.2.1\"" >> /root/.bashrc && \
